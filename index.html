@@ -91,7 +91,6 @@
             margin-top: 70px;
             height: calc(100vh - 70px);
             width: 100%;
-            transition: width 0.3s ease;
         }
 
         .iframe-container iframe {
@@ -105,22 +104,11 @@
             left: 0;
         }
 
-        /* Adjust iframe width when sidebar is visible */
-        .iframe-container.sidebar-visible {
-            margin-left: 235px;
-            width: calc(100% - 235px);
-        }
-
         /* Responsive adjustments */
         @media (max-width: 900px) {
             .sidebar {
                 width: 50%;
                 left: -50%;
-            }
-
-            .iframe-container.sidebar-visible {
-                margin-left: 50%;
-                width: 50%;
             }
         }
     </style>
@@ -150,16 +138,21 @@
         <a href="chatbot.html" onclick="openPage(event, 'chatbot.html')">🤖 AI chat/Doubt support</a>
     </div>
 
-    <div class="iframe-container" id="iframe-container">
+    <div class="iframe-container" id="iframe-container" onclick="hideSidebar()">
         <iframe id="content-frame" src="homepage.html"></iframe>
     </div>
 
     <script>
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
-            const iframeContainer = document.getElementById('iframe-container');
             sidebar.classList.toggle('show-sidebar');
-            iframeContainer.classList.toggle('sidebar-visible');
+        }
+
+        function hideSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            if (sidebar.classList.contains('show-sidebar')) {
+                sidebar.classList.remove('show-sidebar');
+            }
         }
 
         function openPage(event, url) {
