@@ -32,13 +32,13 @@
 
         .banner img {
             height: 40px;
-            margin-left: 10px; /* Adjust this value to shift the logo */
+            margin-left: 10px;
         }
 
         .mobile-menu-toggle {
             font-size: 20px;
             cursor: pointer;
-            margin-right: 10px; /* Adjust this value if necessary */
+            margin-right: 10px;
         }
 
         /* Sidebar styles */
@@ -62,22 +62,13 @@
             left: 0;
         }
 
-        /* Scrollbar styles */
         ::-webkit-scrollbar {
             width: 5px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1;
         }
 
         ::-webkit-scrollbar-thumb {
             background: #007bff;
             border-radius: 10px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: #0056b3;
         }
 
         /* Sidebar links */
@@ -95,7 +86,6 @@
             display: flex;
             align-items: center;
             justify-content: flex-start;
-            position: relative;
         }
 
         .sidebar a:hover {
@@ -108,35 +98,7 @@
         .sidebar a.active {
             background-color: #e0f0ff;
             border: 1px solid blue;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
             color: blue;
-        }
-
-        /* Dropdown menu */
-        .dropdown {
-            margin-bottom: 20px;
-            position: relative;
-        }
-
-        .dropdown select {
-            width: 100%;
-            padding: 10px;
-            font-size: 14px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            appearance: none;
-            background-color: white;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            cursor: pointer;
-        }
-
-        .dropdown::after {
-            content: '\25BC';
-            position: absolute;
-            top: calc(50% - 5px);
-            right: 10px;
-            font-size: 14px;
-            pointer-events: none;
         }
 
         /* Content area styles */
@@ -146,65 +108,13 @@
             margin-top: 70px;
             overflow-y: auto;
             background-color: #fff;
-        }
-
-        /* Button styles */
-        .button-container {
-            flex: 1 0 calc(25% - 20px);
-            max-width: calc(25% - 20px);
-            height: 120px;
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            text-decoration: none;
-            color: black;
-            transition: transform 0.2s;
-            cursor: pointer;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .button-container:hover {
-            transform: translateY(-5px);
-        }
-
-        .button-icon {
-            font-size: 22px;
-            margin-bottom: 10px;
-        }
-
-        .button-text {
-            font-size: 18px;
-            font-weight: bold;
-        }
-
-        .premium-label {
-            font-size: 12px;
-            color: #d63384;
-            margin-top: 5px;
-            font-weight: bold;
+            margin-left: 250px;
         }
 
         @media (max-width: 900px) {
             .sidebar {
                 width: 50%;
                 height: calc(100vh - 70px);
-                top: 70px;
-                left: -100%;
-                transition: left 0.3s ease;
-            }
-
-            .sidebar.show-sidebar {
-                left: 0;
-            }
-
-            .mobile-menu-toggle {
-                display: block;
             }
 
             .button-container {
@@ -213,15 +123,7 @@
             }
 
             .content {
-                margin-top: 70px;
-            }
-        }
-
-        @media (max-width: 600px) {
-            .button-container {
-                flex: 1 0 calc(50% - 20px);
-                max-width: calc(50% - 20px);
-                height: 100px;
+                margin-left: 0;
             }
         }
     </style>
@@ -289,7 +191,6 @@
                 .then(data => {
                     document.getElementById('content').innerHTML = data;
                     window.scrollTo(0, 0);
-                    document.getElementById('banner').style.display = (url === 'homepage.html') ? 'flex' : 'none';
                 })
                 .catch(error => console.error('Error loading page:', error));
         }
