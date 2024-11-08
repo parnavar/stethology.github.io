@@ -17,28 +17,47 @@
             overflow-x: hidden;
         }
 
-        /* Banner (header bar) styles */
+        /* Stylish and modern banner (header bar) */
         .banner {
-            background-color: white;
-            padding: 10px 20px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background-color: #ffffff;
+            padding: 12px 25px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
             display: flex;
             align-items: center;
             position: fixed;
-            top: 0;
-            width: 100%;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 95%;
+            max-width: 1200px;
+            border-radius: 15px;
             z-index: 1000;
         }
 
         .banner img {
             height: 40px;
-            margin-left: 10px;
+            margin-left: 15px;
         }
 
         .mobile-menu-toggle {
-            font-size: 20px;
+            font-size: 24px;
             cursor: pointer;
-            margin-right: 10px;
+            margin-right: 15px;
+            color: #007bff;
+            transition: color 0.3s;
+        }
+
+        .mobile-menu-toggle:hover {
+            color: #0056b3;
+        }
+
+        .banner-title {
+            flex-grow: 1;
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+            margin: 0;
+            padding: 0;
         }
 
         /* Sidebar styles */
@@ -118,6 +137,7 @@
 <body>
     <div class="banner" id="banner">
         <div class="mobile-menu-toggle" onclick="toggleSidebar()">☰</div>
+        <div class="banner-title">Stethology for NEET</div>
         <img src="sfneetlogo.jpg" alt="Stethology for NEET Logo">
     </div>
 
