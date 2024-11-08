@@ -14,6 +14,7 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
+            overflow-x: hidden;
         }
 
         /* Banner (header bar) styles */
@@ -51,18 +52,10 @@
             scrollbar-color: blue white;
             position: fixed;
             top: 70px;
-            left: 0;
+            left: -235px;
             height: calc(100vh - 70px);
-        }
-
-        /* Scrollbar styles */
-        ::-webkit-scrollbar {
-            width: 5px;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: #007bff;
-            border-radius: 10px;
+            transition: left 0.3s ease;
+            z-index: 900;
         }
 
         /* Sidebar links */
@@ -95,12 +88,10 @@
 
         /* Iframe container */
         .iframe-container {
-            margin-left: 235px;
             margin-top: 70px;
             height: calc(100vh - 70px);
-            background-color: #fff;
-            overflow: hidden;
-            position: relative;
+            width: 100%;
+            transition: width 0.3s ease;
         }
 
         .iframe-container iframe {
@@ -109,13 +100,27 @@
             border: none;
         }
 
+        /* Show sidebar */
+        .sidebar.show-sidebar {
+            left: 0;
+        }
+
+        /* Adjust iframe width when sidebar is visible */
+        .iframe-container.sidebar-visible {
+            margin-left: 235px;
+            width: calc(100% - 235px);
+        }
+
+        /* Responsive adjustments */
         @media (max-width: 900px) {
             .sidebar {
                 width: 50%;
+                left: -50%;
             }
 
-            .iframe-container {
+            .iframe-container.sidebar-visible {
                 margin-left: 50%;
+                width: 50%;
             }
         }
     </style>
@@ -128,7 +133,7 @@
         <img src="sfneetlogo.jpg" alt="Stethology for NEET Logo">
     </div>
 
-    <div class="sidebar">
+    <div class="sidebar" id="sidebar">
         <div class="dropdown">
             <select id="class-select" onchange="handleDropdownChange(event)">
                 <option value="Select class" disabled>Select class</option>
@@ -145,40 +150,31 @@
         <a href="chatbot.html" onclick="openPage(event, 'chatbot.html')">🤖 AI chat/Doubt support</a>
     </div>
 
-    <div class="iframe-container">
+    <div class="iframe-container" id="iframe-container">
         <iframe id="content-frame" src="homepage.html"></iframe>
     </div>
 
     <script>
         function toggleSidebar() {
-            document.querySelector('.sidebar').classList.toggle('show-sidebar');
+            const sidebar = document.getElementById('sidebar');
+            const iframeContainer = document.getElementById('iframe-container');
+            sidebar.classList.toggle('show-sidebar');
+            iframeContainer.classList.toggle('sidebar-visible');
         }
-
-        document.querySelectorAll('.sidebar a').forEach(link => {
-            link.addEventListener('click', function () {
-                document.querySelectorAll('.sidebar a').forEach(link => link.classList.remove('active'));
-                this.classList.add('active');
-            });
-        });
-
-        const selectElement = document.getElementById('class-select');
-        const savedClass = localStorage.getItem('selectedClass');
-
-        if (savedClass) {
-            selectElement.value = savedClass;
-        } else {
-            selectElement.value = "Select class";
-        }
-
-        function handleDropdownChange(event) {
-            localStorage.setItem('selectedClass', event.target.value);
-        }
-
-        selectElement.addEventListener('change', handleDropdownChange);
 
         function openPage(event, url) {
             event.preventDefault();
             document.getElementById('content-frame').src = url;
+            document.querySelectorAll('.sidebar a').forEach(link => link.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+        }
+
+        const selectElement = document.getElementById('class-select');
+        const savedClass = localStorage.getItem('selectedClass');
+        if (savedClass) selectElement.value = savedClass;
+
+        function handleDropdownChange(event) {
+            localStorage.setItem('selectedClass', event.target.value);
         }
     </script>
 </body>
