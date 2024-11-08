@@ -53,13 +53,8 @@
             scroll-behavior: smooth;
             position: fixed;
             top: 70px;
-            left: -100%;
-            height: calc(100vh - 70px);
-            transition: left 0.3s ease;
-        }
-
-        .sidebar.show-sidebar {
             left: 0;
+            height: calc(100vh - 70px);
         }
 
         ::-webkit-scrollbar {
@@ -101,14 +96,20 @@
             color: blue;
         }
 
-        /* Content area styles */
-        .content {
+        /* Content area as iframe container */
+        .iframe-container {
             flex: 1;
-            padding: 20px;
-            margin-top: 70px;
-            overflow-y: auto;
-            background-color: #fff;
             margin-left: 250px;
+            margin-top: 70px;
+            padding: 0;
+            background-color: #fff;
+            height: calc(100vh - 70px);
+        }
+
+        .iframe-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
         }
 
         @media (max-width: 900px) {
@@ -117,13 +118,8 @@
                 height: calc(100vh - 70px);
             }
 
-            .button-container {
-                flex: 1 0 calc(50% - 20px);
-                max-width: calc(50% - 20px);
-            }
-
-            .content {
-                margin-left: 0;
+            .iframe-container {
+                margin-left: 50%;
             }
         }
     </style>
@@ -145,16 +141,16 @@
                 <option value="🧑‍🎓Dropper - NEET">🧑‍🎓Dropper - NEET</option>
             </select>
         </div>
-        <a href="homepage.html" class="active" onclick="loadPage(event, 'homepage.html')">🏠 Home</a>
-        <a href="batches.html" onclick="loadPage(event, 'batches.html')">✍️ Batches</a>
-        <a href="https://www.example.com/subject3" onclick="loadPage(event, 'https://www.example.com/subject3')">📝 Test Series</a>
-        <a href="#" onclick="loadPage(event, '#')">👨🏻‍🏫 Mentorship</a>
-        <a href="#" onclick="loadPage(event, '#')">🌐 Connect</a>
-        <a href="chatbot.html" onclick="loadPage(event, 'chatbot.html')">🤖 AI chat/Doubt support</a>
+        <a href="homepage.html" class="active" onclick="openPage(event, 'homepage.html')">🏠 Home</a>
+        <a href="batches.html" onclick="openPage(event, 'batches.html')">✍️ Batches</a>
+        <a href="https://www.example.com/subject3" onclick="openPage(event, 'https://www.example.com/subject3')">📝 Test Series</a>
+        <a href="#" onclick="openPage(event, '#')">👨🏻‍🏫 Mentorship</a>
+        <a href="#" onclick="openPage(event, '#')">🌐 Connect</a>
+        <a href="chatbot.html" onclick="openPage(event, 'chatbot.html')">🤖 AI chat/Doubt support</a>
     </div>
 
-    <div class="content" id="content">
-        <!-- Dynamic content will be loaded here -->
+    <div class="iframe-container">
+        <iframe id="content-frame" src="homepage.html"></iframe>
     </div>
 
     <script>
@@ -184,21 +180,10 @@
 
         selectElement.addEventListener('change', handleDropdownChange);
 
-        function loadPage(event, url) {
+        function openPage(event, url) {
             event.preventDefault();
-            fetch(url)
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById('content').innerHTML = data;
-                    window.scrollTo(0, 0);
-                })
-                .catch(error => console.error('Error loading page:', error));
+            document.getElementById('content-frame').src = url;
         }
-
-        // Load the default page
-        document.addEventListener('DOMContentLoaded', () => {
-            loadPage(new Event('default'), 'homepage.html');
-        });
     </script>
 </body>
 
