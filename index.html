@@ -10,25 +10,32 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f0f0f0;
+            background-color: #ffffff; /* Set body background to white */
             overflow-x: hidden;
         }
 
         /* Stylish and modern banner (header bar) */
+        .banner-wrapper {
+            background-color: #ffffff; /* White background for the area around the header */
+            padding: 0 20px; /* Adding padding around the banner */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Narrow shadow border around the header */
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
         .banner {
             background-color: #ffffff;
             padding: 12px 25px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Narrow shadow border */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Narrow shadow border for the header */
             display: flex;
             align-items: center;
-            position: fixed;
-            top: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 95%;
+            justify-content: space-between;
             max-width: 1200px;
+            margin: 0 auto; /* Center align the header bar */
             border-radius: 15px;
-            z-index: 1000;
         }
 
         .banner img {
@@ -49,7 +56,6 @@
         }
 
         .banner-title {
-            flex-grow: 1;
             font-size: 20px;
             font-weight: bold;
             color: #333;
@@ -103,7 +109,7 @@
 
         /* Iframe container */
         .iframe-container {
-            margin-top: 90px; /* Creates space below the banner */
+            margin-top: 90px; /* Creates space below the header */
             padding: 20px;
             height: calc(100vh - 90px);
             width: 100%;
@@ -134,10 +140,12 @@
 </head>
 
 <body>
-    <div class="banner" id="banner">
-        <div class="mobile-menu-toggle" onclick="toggleSidebar()">☰</div>
-        <div class="banner-title">Stethology for NEET</div>
-        <img src="sfneetlogo.jpg" alt="Stethology for NEET Logo">
+    <div class="banner-wrapper">
+        <div class="banner" id="banner">
+            <div class="mobile-menu-toggle" onclick="toggleSidebar()">☰</div>
+            <div class="banner-title">Stethology for NEET</div>
+            <img src="sfneetlogo.jpg" alt="Stethology for NEET Logo">
+        </div>
     </div>
 
     <div class="sidebar" id="sidebar">
