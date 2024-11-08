@@ -52,7 +52,7 @@
             scrollbar-color: blue white;
             position: fixed;
             top: 70px;
-            left: -235px;
+            left: -100%; /* Fully hidden initially */
             height: calc(100vh - 70px);
             transition: left 0.3s ease;
             z-index: 900;
@@ -108,7 +108,7 @@
         @media (max-width: 900px) {
             .sidebar {
                 width: 50%;
-                left: -50%;
+                left: -50%; /* Fully hidden on smaller screens */
             }
         }
     </style>
