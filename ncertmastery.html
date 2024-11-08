@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* Global styles */
+        html, body {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: white;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Content area styles */
+        .content {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto; /* Allow vertical scrolling within the content area if needed */
+        }
+
+        /* Banner styles */
+        .banner {
+            background-color: white;
+            color: black;
+            padding: 20px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        /* Navbar styles */
+        .navbar {
+            display: flex;
+            justify-content: center;
+            background-color: white;
+            padding: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .navbar a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+            position: relative;
+            font-size: 14px;
+            transition: color 0.3s ease-in-out;
+        }
+
+        .navbar a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            height: 2px;
+            background-color: black;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Container for buttons */
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        /* Button styles */
+        .button-container {
+            flex: 1 0 calc(25% - 20px); /* Adjusted for desktop to fit 4 buttons per row */
+            max-width: calc(25% - 20px); /* Adjusted for desktop to fit 4 buttons per row */
+            height: 120px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            text-decoration: none;
+            color: black;
+            transition: transform 0.2s;
+            cursor: pointer;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .button-container:hover {
+            transform: translateY(-5px);
+        }
+
+        .button-icon {
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        .button-text {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .premium-label {
+            font-size: 12px;
+            color: #d63384;
+            margin-top: 5px;
+            font-weight: bold;
+        }
+
+        @media (max-width: 900px) {
+            /* Adjust sidebar and button container for tablets */
+            .sidebar {
+                width: 100%;
+                height: 100vh;
+                position: fixed;
+                top: 0;
+                left: -100%;
+                transition: all 0.3s ease;
+            }
+
+            .sidebar.show-sidebar {
+                left: 0;
+            }
+
+            .mobile-menu-toggle {
+                display: block; /* Show toggle button on tablets */
+                font-size: 20px;
+                text-align: center;
+                cursor: pointer;
+                margin-bottom: 10px;
+            }
+
+            .button-container {
+                flex: 1 0 calc(50% - 20px); /* 2 buttons per row for tablets */
+                max-width: calc(50% - 20px); /* 2 buttons per row for tablets */
+            }
+        }
+
+        @media (max-width: 600px) {
+            /* Adjust button container for mobile */
+            .button-container {
+                flex: 1 0 calc(50% - 20px); /* 2 buttons per row for mobile */
+                max-width: calc(50% - 20px); /* 2 buttons per row for mobile */
+                height: 100px; /* Reduced height for mobile */
+            }
+        }/* Scrollbar styles */
+/* Works only in WebKit browsers (e.g., Chrome, Safari) */
+::-webkit-scrollbar {
+    width: 5px; /* Width of the scrollbar */
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Color of the track */
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #007bff; /* Color of the scrollbar handle */
+    border-radius: 10px; /* Rounded corners of the handle */
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #0056b3; /* Darker color when hovered */
+}
+
+    </style>
+    <title>Stethology for NEET</title>
+</head>
+
+<body>
+
+
+    <!-- Content section -->
+    <div class="content">
+        <!-- Banner and navigation bar -->
+        <div class="banner">
+            <b><font size="4">NCERT Mastery Series 1.0</font></b>
+        </div>
+        <div class="navbar">
+            <a class="active">All Classes</a>
+            <a href="#" onclick="comingSoon(event)">Community</a>
+            <a href="#" onclick="comingSoon(event)">📢</a>
+        </div>
+        <!-- Button containers -->
+        <div class="container">
+            <div class="button-container" onclick="navigateTo('https://parnavar.github.io/stethologyneet.github.io/', this)">
+                <div class="button-icon">🔔</div>
+                <div class="button-text">Notices</div>
+            </div>
+            <div class="button-container" onclick="navigateTo('https://www.example.com/subject2', this)">
+                <div class="button-icon">🔬</div>
+                <div class="button-text">Physics</div>
+            </div>
+            <div class="button-container" onclick="navigateTo('https://stethologyforneet.godaddysites.com/biology-nms-qp', this)">
+                <div class="button-icon">🌿</div>
+                <div class="button-text">Botany</div>
+            </div>
+            <div class="button-container" onclick="navigateTo('https://www.example.com/subject4', this)">
+                <div class="button-icon">🦁</div>
+                <div class="button-text">Zoology</div>
+            </div>
+            <div class="button-container" onclick="navigateTo('https://www.example.com/subject5', this)">
+                <div class="button-icon">⚛️</div>
+                <div class="button-text">Inorganic</div>
+            </div>
+            <div class="button-container" onclick="navigateTo('https://www.example.com/subject6', this)">
+                <div class="button-icon">🧪</div>
+                <div class="button-text">Organic</div>
+            </div>
+            <div class="button-container" onclick="navigateTo('https://www.example.com/subject7', this)">
+                <div class="button-icon">📘</div>
+                <div class="button-text">Physical</div>
+            </div>
+            <div class="button-container" onclick="navigateTo('https://www.example.com/subject8', this)">
+                <div class="button-icon">📝</div>
+                <div class="button-text">Tests</div>
+            </div>
+            <div class="button-container" onclick="navigateTo('https://www.example.com/subject9', this)">
+                <div class="button-icon">👨‍🏫</div>
+                <div class="button-text">Mentorship</div>
+                <span class="premium-label">PREMIUM</span>
+            </div>
+            <div class="button-container" onclick="navigateTo('#', this)">
+                <div class="button-icon">❓</div>
+                <div class="button-text">Doubts</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript to toggle sidebar in mobile -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Retrieve the selected value from localStorage if available
+            const selectedValue = localStorage.getItem('selectedClass');
+            if (selectedValue) {
+                // Set the dropdown value to the retrieved value
+                document.querySelector('.dropdown select').value = selectedValue;
+            }
+
+            // Event listener for dropdown change
+            document.querySelector('.dropdown select').addEventListener('change', function (event) {
+                const value = event.target.value;
+                localStorage.setItem('selectedClass', value); // Store selected value in localStorage
+                alert(`Selected: ${value}`);
+                // You can add code here to navigate to different pages based on the selection
+            });
+        });
+
+        function toggleSidebar() {
+            const sidebar = document.querySelector('.sidebar');
+            sidebar.classList.toggle('show-sidebar');
+        }
+
+        function navigateTo(url, element) {
+            element.classList.add('clicked');
+            setTimeout(function () {
+                if (url !== '#') {
+                    window.open(url, '_blank');
+                }
+                element.classList.remove('clicked');
+            }, 400);
+        }
+
+        function comingSoon(event) {
+            event.preventDefault();
+            alert("Coming Soon");
+        }
+    </script>
+</body>
+
+</html>
