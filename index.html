@@ -24,6 +24,7 @@
             top: 0; /* Ensures the header bar is at the top */
             left: 0;
             z-index: 1000;
+            padding-top: 20px;
         }
 
         .banner {
@@ -72,9 +73,9 @@
             scrollbar-width: thin;
             scrollbar-color: blue white;
             position: fixed;
-            top: 80px; /* Adjusted to align below the header */
+            top: 120px; /* Ensure sidebar is below the header bar */
             left: -100%; /* Fully hidden initially */
-            height: calc(100vh - 80px);
+            height: calc(100vh - 120px);
             transition: left 0.3s ease;
             z-index: 900;
         }
