@@ -11,9 +11,6 @@
             margin: 0;
             padding: 0;
             background-color: #f0f0f0;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
             overflow-x: hidden;
         }
 
@@ -57,7 +54,6 @@
             font-weight: bold;
             color: #333;
             margin: 0;
-            padding: 0;
         }
 
         /* Sidebar styles */
@@ -70,9 +66,9 @@
             scrollbar-width: thin;
             scrollbar-color: blue white;
             position: fixed;
-            top: 70px;
+            top: 80px;
             left: -100%; /* Fully hidden initially */
-            height: calc(100vh - 70px);
+            height: calc(100vh - 80px);
             transition: left 0.3s ease;
             z-index: 900;
         }
@@ -107,9 +103,12 @@
 
         /* Iframe container */
         .iframe-container {
-            margin-top: 70px;
-            height: calc(100vh - 70px);
+            margin-top: 90px; /* Creates space below the banner */
+            padding: 20px;
+            height: calc(100vh - 90px);
             width: 100%;
+            background-color: #ffffff;
+            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1); /* Shadow for separation */
         }
 
         .iframe-container iframe {
