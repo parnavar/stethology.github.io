@@ -49,6 +49,8 @@
             font-weight: 600;
             margin: 0;
             color: #333333;
+            flex-grow: 1;
+            text-align: center;
         }
 
         .mobile-menu-toggle {
@@ -56,6 +58,7 @@
             cursor: pointer;
             color: #333333;
             transition: color 0.3s;
+            margin-right: 15px;
         }
 
         .mobile-menu-toggle:hover {
@@ -126,10 +129,48 @@
         }
 
         /* Responsive adjustments */
-        @media (max-width: 900px) {
+        @media (max-width: 768px) {
+            /* Adjust banner for mobile screens */
+            .banner-wrapper {
+                top: 10px;
+            }
+
+            .banner {
+                padding: 10px 20px;
+                width: 95%;
+                max-width: 100%;
+                box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+            }
+
+            .banner-title {
+                font-size: 18px;
+                margin: 0;
+                text-align: center;
+                flex-grow: 1;
+            }
+
+            .mobile-menu-toggle {
+                font-size: 26px;
+                margin-right: 0;
+            }
+
+            .banner img {
+                height: 35px;
+            }
+
+            /* Adjust iframe container margin */
+            .iframe-container {
+                margin-top: 110px; /* Reduced gap below the header */
+            }
+
+            /* Hide sidebar completely when closed */
             .sidebar {
-                width: 50%;
-                left: -50%; /* Fully hidden on smaller screens */
+                display: none;
+            }
+
+            .sidebar.show-sidebar {
+                display: block;
+                left: 0;
             }
         }
     </style>
@@ -140,6 +181,7 @@
     <div class="banner-wrapper">
         <div class="banner" id="banner">
             <div class="mobile-menu-toggle" onclick="toggleSidebar()">☰</div>
+            <div class="banner-title">Stethology for NEET</div>
             <img src="sfneetlogo.jpg" alt="Stethology for NEET Logo">
         </div>
     </div>
