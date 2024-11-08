@@ -128,55 +128,9 @@
             left: 0;
         }
 
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            /* Adjust banner for mobile screens */
-            .banner-wrapper {
-                top: 10px;
-            }
-
-            .banner {
-                padding: 10px 20px;
-                width: 95%;
-                max-width: 100%;
-                box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
-            }
-
-            .banner-title {
-                font-size: 18px;
-                margin: 0;
-                text-align: center;
-                flex-grow: 1;
-            }
-
-            .mobile-menu-toggle {
-                font-size: 26px;
-                margin-right: 0;
-            }
-
-            .banner img {
-                height: 35px;
-            }
-
-            /* Adjust iframe container margin */
-            .iframe-container {
-                margin-top: 80px;
-            }
-
-            /* Hide sidebar completely when closed */
-            .sidebar {
-                display: none;
-            }
-
-            .sidebar.show-sidebar {
-                display: block;
-                left: 0;
-            }
-        }
-
-        /* Stylish Modern Footer */
+        /* Footer styles */
         .footer {
-            background-color: #333333; /* Dark background */
+            background-color: #333333;
             color: #ffffff;
             padding: 40px 20px;
             text-align: center;
@@ -210,7 +164,7 @@
         }
 
         .footer-links a:hover {
-            color: #007bff; /* Highlight on hover */
+            color: #007bff;
         }
 
         .footer-social a {
@@ -223,7 +177,7 @@
         }
 
         .footer-social a:hover {
-            color: #007bff; /* Highlight on hover */
+            color: #007bff;
         }
 
         .footer-bottom {
@@ -234,15 +188,27 @@
             color: #aaaaaa;
         }
 
-        /* Responsive Footer for Mobile */
+        /* Responsive design */
         @media (max-width: 768px) {
             .footer-content {
                 flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-links {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
             }
 
             .footer-links a {
-                display: block;
                 margin: 10px 0;
+            }
+
+            .iframe-container {
+                margin-top: 90px;
+                padding: 10px;
+                height: calc(100vh - 120px);
             }
         }
     </style>
