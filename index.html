@@ -7,36 +7,38 @@
     <style>
         /* Reset and global styles */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Roboto', Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #ffffff; /* Set body background to white */
+            background-color: #ffffff;
             overflow-x: hidden;
         }
 
-        /* Stylish and modern banner (header bar) */
+        /* Modern Banner Style */
         .banner-wrapper {
-            background-color: #ffffff; /* White background for the area around the header */
-            padding: 0 20px; /* Adding padding around the banner */
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Narrow shadow border around the header */
+            padding: 0 20px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow around banner */
             width: 100%;
             position: fixed;
-            top: 0; /* Ensures the header bar is at the top */
-            left: 0;
+            top: 0;
             z-index: 1000;
-            padding-top: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .banner {
-            background-color: #ffffff;
-            padding: 12px 25px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Narrow shadow border for the header */
             display: flex;
             align-items: center;
             justify-content: space-between;
+            background: linear-gradient(135deg, #007bff, #00d2ff); /* Gradient background */
+            padding: 14px 30px;
+            border-radius: 12px;
             max-width: 1200px;
-            margin: 0 auto; /* Center align the header bar */
-            border-radius: 15px;
+            width: 100%;
+            color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15); /* Light shadow */
         }
 
         .banner img {
@@ -44,23 +46,22 @@
             margin-left: 15px;
         }
 
+        .banner-title {
+            font-size: 22px;
+            font-weight: 600;
+            margin: 0;
+            color: #ffffff;
+        }
+
         .mobile-menu-toggle {
-            font-size: 24px;
+            font-size: 28px;
             cursor: pointer;
-            margin-right: 15px;
-            color: #007bff;
+            color: #ffffff;
             transition: color 0.3s;
         }
 
         .mobile-menu-toggle:hover {
-            color: #0056b3;
-        }
-
-        .banner-title {
-            font-size: 20px;
-            font-weight: bold;
-            color: #333;
-            margin: 0;
+            color: #00d2ff;
         }
 
         /* Sidebar styles */
@@ -70,12 +71,10 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             padding: 20px;
             overflow-y: auto;
-            scrollbar-width: thin;
-            scrollbar-color: blue white;
             position: fixed;
-            top: 120px; /* Ensure sidebar is below the header bar */
-            left: -100%; /* Fully hidden initially */
-            height: calc(100vh - 120px);
+            top: 90px; /* Below the header */
+            left: -100%;
+            height: calc(100vh - 90px);
             transition: left 0.3s ease;
             z-index: 900;
         }
@@ -99,23 +98,22 @@
             transform: translateY(-5px);
             box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
             background-color: #f0f8ff;
-            color: blue;
+            color: #007bff;
         }
 
         .sidebar a.active {
             background-color: #e0f0ff;
-            border: 1px solid blue;
-            color: blue;
+            border: 1px solid #007bff;
+            color: #007bff;
         }
 
         /* Iframe container */
         .iframe-container {
-            margin-top: 120px; /* Adjusted space below the header */
+            margin-top: 100px; /* Space below the header */
             padding: 20px;
-            height: calc(100vh - 120px);
+            height: calc(100vh - 100px);
             width: 100%;
             background-color: #ffffff;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Light shadow for separation */
         }
 
         .iframe-container iframe {
