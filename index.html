@@ -16,13 +16,12 @@
             min-height: 100vh;
         }
 
-        /* Banner styles */
+        /* Banner (header bar) styles */
         .banner {
             background-color: white;
             padding: 10px 20px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             display: flex;
-            justify-content: flex-start;
             align-items: center;
             position: fixed;
             top: 0;
@@ -50,13 +49,13 @@
             overflow-y: auto;
             scrollbar-width: thin;
             scrollbar-color: blue white;
-            scroll-behavior: smooth;
             position: fixed;
             top: 70px;
             left: 0;
             height: calc(100vh - 70px);
         }
 
+        /* Scrollbar styles */
         ::-webkit-scrollbar {
             width: 5px;
         }
@@ -77,10 +76,8 @@
             background-color: white;
             border-radius: 5px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: block;
             transition: transform 0.2s, box-shadow 0.2s, background-color 0.3s, color 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
         }
 
         .sidebar a:hover {
@@ -96,14 +93,14 @@
             color: blue;
         }
 
-        /* Content area as iframe container */
+        /* Iframe container */
         .iframe-container {
-            flex: 1;
-            margin-left: 250px;
+            margin-left: 235px;
             margin-top: 70px;
-            padding: 0;
-            background-color: #fff;
             height: calc(100vh - 70px);
+            background-color: #fff;
+            overflow: hidden;
+            position: relative;
         }
 
         .iframe-container iframe {
@@ -115,7 +112,6 @@
         @media (max-width: 900px) {
             .sidebar {
                 width: 50%;
-                height: calc(100vh - 70px);
             }
 
             .iframe-container {
