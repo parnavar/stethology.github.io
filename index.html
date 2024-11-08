@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* Reset and global styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Banner styles */
+        .banner {
+            background-color: white;
+            padding: 10px 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .banner img {
+            height: 40px;
+            margin-left: 10px; /* Adjust this value to shift the logo */
+        }
+
+        .mobile-menu-toggle {
+            font-size: 20px;
+            cursor: pointer;
+            margin-right: 10px; /* Adjust this value if necessary */
+        }
+
+        /* Sidebar styles */
+        .sidebar {
+            width: 235px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: blue white;
+            scroll-behavior: smooth;
+            position: fixed;
+            top: 70px;
+            left: -100%;
+            height: calc(100vh - 70px);
+            transition: left 0.3s ease;
+        }
+
+        .sidebar.show-sidebar {
+            left: 0;
+        }
+
+        /* Scrollbar styles */
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #007bff;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #0056b3;
+        }
+
+        /* Sidebar links */
+        .sidebar a {
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+            margin: 10px 0;
+            font-size: 14px;
+            padding: 15px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s, background-color 0.3s, color 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            position: relative;
+        }
+
+        .sidebar a:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+            background-color: #f0f8ff;
+            color: blue;
+        }
+
+        .sidebar a.active {
+            background-color: #e0f0ff;
+            border: 1px solid blue;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            color: blue;
+        }
+
+        /* Dropdown menu */
+        .dropdown {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .dropdown select {
+            width: 100%;
+            padding: 10px;
+            font-size: 14px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            appearance: none;
+            background-color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+        }
+
+        .dropdown::after {
+            content: '\25BC';
+            position: absolute;
+            top: calc(50% - 5px);
+            right: 10px;
+            font-size: 14px;
+            pointer-events: none;
+        }
+
+        /* Content area styles */
+        .content {
+            flex: 1;
+            padding: 20px;
+            margin-top: 70px;
+            overflow-y: auto;
+            background-color: #fff;
+        }
+
+        /* Button styles */
+        .button-container {
+            flex: 1 0 calc(25% - 20px);
+            max-width: calc(25% - 20px);
+            height: 120px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            text-decoration: none;
+            color: black;
+            transition: transform 0.2s;
+            cursor: pointer;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .button-container:hover {
+            transform: translateY(-5px);
+        }
+
+        .button-icon {
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        .button-text {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .premium-label {
+            font-size: 12px;
+            color: #d63384;
+            margin-top: 5px;
+            font-weight: bold;
+        }
+
+        @media (max-width: 900px) {
+            .sidebar {
+                width: 50%;
+                height: calc(100vh - 70px);
+                top: 70px;
+                left: -100%;
+                transition: left 0.3s ease;
+            }
+
+            .sidebar.show-sidebar {
+                left: 0;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .button-container {
+                flex: 1 0 calc(50% - 20px);
+                max-width: calc(50% - 20px);
+            }
+
+            .content {
+                margin-top: 70px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .button-container {
+                flex: 1 0 calc(50% - 20px);
+                max-width: calc(50% - 20px);
+                height: 100px;
+            }
+        }
+    </style>
+    <title>Stethology for NEET</title>
+</head>
+
+<body>
+    <div class="banner" id="banner">
+        <div class="mobile-menu-toggle" onclick="toggleSidebar()">☰</div>
+        <img src="sfneetlogo.jpg" alt="Stethology for NEET Logo">
+    </div>
+
+    <div class="sidebar">
+        <div class="dropdown">
+            <select id="class-select" onchange="handleDropdownChange(event)">
+                <option value="Select class" disabled>Select class</option>
+                <option value="🧑‍🎓XI - NEET">🧑‍🎓XI - NEET</option>
+                <option value="🧑‍🎓XII - NEET">🧑‍🎓XII - NEET</option>
+                <option value="🧑‍🎓Dropper - NEET">🧑‍🎓Dropper - NEET</option>
+            </select>
+        </div>
+        <a href="homepage.html" class="active" onclick="loadPage(event, 'homepage.html')">🏠 Home</a>
+        <a href="batches.html" onclick="loadPage(event, 'batches.html')">✍️ Batches</a>
+        <a href="https://www.example.com/subject3" onclick="loadPage(event, 'https://www.example.com/subject3')">📝 Test Series</a>
+        <a href="#" onclick="loadPage(event, '#')">👨🏻‍🏫 Mentorship</a>
+        <a href="#" onclick="loadPage(event, '#')">🌐 Connect</a>
+        <a href="chatbot.html" onclick="loadPage(event, 'chatbot.html')">🤖 AI chat/Doubt support</a>
+    </div>
+
+    <div class="content" id="content">
+        <!-- Dynamic content will be loaded here -->
+    </div>
+
+    <script>
+        function toggleSidebar() {
+            document.querySelector('.sidebar').classList.toggle('show-sidebar');
+        }
+
+        document.querySelectorAll('.sidebar a').forEach(link => {
+            link.addEventListener('click', function () {
+                document.querySelectorAll('.sidebar a').forEach(link => link.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        const selectElement = document.getElementById('class-select');
+        const savedClass = localStorage.getItem('selectedClass');
+
+        if (savedClass) {
+            selectElement.value = savedClass;
+        } else {
+            selectElement.value = "Select class";
+        }
+
+        function handleDropdownChange(event) {
+            localStorage.setItem('selectedClass', event.target.value);
+        }
+
+        selectElement.addEventListener('change', handleDropdownChange);
+
+        function loadPage(event, url) {
+            event.preventDefault();
+            fetch(url)
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('content').innerHTML = data;
+                    window.scrollTo(0, 0);
+                    document.getElementById('banner').style.display = (url === 'homepage.html') ? 'flex' : 'none';
+                })
+                .catch(error => console.error('Error loading page:', error));
+        }
+
+        // Load the default page
+        document.addEventListener('DOMContentLoaded', () => {
+            loadPage(new Event('default'), 'homepage.html');
+        });
+    </script>
+</body>
+
+</html>
