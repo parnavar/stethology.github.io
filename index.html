@@ -20,7 +20,7 @@
             justify-content: center;
             align-items: center;
             position: fixed;
-            top: 20px;
+            top: 20px; /* Spacing from the top */
             width: 100%;
             z-index: 1000;
         }
@@ -30,12 +30,12 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background-color: #ffffff;
+            background-color: #ffffff; /* White background */
             padding: 14px 30px;
             border-radius: 12px;
             width: 90%;
             max-width: 1200px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15); /* Light shadow */
             color: #333;
         }
 
@@ -110,7 +110,7 @@
 
         /* Iframe container */
         .iframe-container {
-            margin-top: 130px;
+            margin-top: 130px; /* Space below the header */
             padding: 20px;
             height: calc(100vh - 150px);
             width: 100%;
@@ -128,97 +128,50 @@
             left: 0;
         }
 
-        /* Footer styles */
-        .footer {
-            background-color: #333333;
-            color: #ffffff;
-            padding: 40px 20px;
-            text-align: center;
-            position: relative;
-            z-index: 1000;
-        }
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            /* Adjust banner for mobile screens */
+            .banner-wrapper {
+                top: 10px;
+            }
 
-        .footer-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-between;
-        }
+            .banner {
+                padding: 10px 20px;
+                width: 95%;
+                max-width: 100%;
+                box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+            }
 
-        .footer-logo img {
-            height: 50px;
-            margin-bottom: 20px;
-        }
+            .banner-title {
+                font-size: 18px;
+                margin: 0;
+                text-align: center;
+                flex-grow: 1;
+            }
 
-        .footer-links {
-            margin-bottom: 20px;
-        }
+            .mobile-menu-toggle {
+                font-size: 26px;
+                margin-right: 0;
+            }
 
-        .footer-links a {
-            color: #ffffff;
-            text-decoration: none;
-            margin: 0 15px;
-            font-size: 16px;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
+            .banner img {
+                height: 35px;
+            }
 
-        .footer-links a:hover {
-            color: #007bff;
-        }
+            /* Adjust iframe container margin */
+            .iframe-container {
+                margin-top: 110px; /* Reduced gap below the header */
+            }
 
-        .footer-social a {
-            display: inline-block;
-            margin: 0 10px;
-            color: #ffffff;
-            font-size: 20px;
-            transition: color 0.3s ease;
-            text-decoration: none;
-        }
+            /* Hide sidebar completely when closed */
+            .sidebar {
+                display: none;
+            }
 
-        .footer-social a:hover {
-            color: #007bff;
-        }
-
-        .footer-bottom {
-            margin-top: 30px;
-            border-top: 1px solid #555555;
-            padding-top: 20px;
-            font-size: 14px;
-            color: #aaaaaa;
-        }
-
-       /* Responsive design */
-@media (max-width: 768px) {
-    .footer-content {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .footer-links {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .footer-links a {
-        margin: 10px 0;
-    }
-
-    .iframe-container {
-        margin-top: 0; /* Remove the space above the iframe */
-        padding: 10px;
-        height: calc(100vh - 60px); /* Adjust height to fill the screen */
-    }
-
-    /* Make footer continuous with the iframe */
-    .footer {
-        margin-top: 0; /* Remove the space between the iframe and footer */
-        padding: 20px 0; /* Add padding for aesthetic spacing */
-        width: 100%; /* Make sure the footer spans the full width */
-    }
-}
-
+            .sidebar.show-sidebar {
+                display: block;
+                left: 0;
+            }
         }
     </style>
     <title>Stethology for NEET</title>
@@ -252,29 +205,6 @@
     <div class="iframe-container" id="iframe-container" onclick="hideSidebar()">
         <iframe id="content-frame" src="homepage.html"></iframe>
     </div>
-
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-logo">
-                <img src="sfneetlogo.jpg" alt="Stethology for NEET Logo">
-            </div>
-            <div class="footer-links">
-                <a href="about.html">About Us</a>
-                <a href="contact.html">Contact</a>
-                <a href="privacy.html">Privacy Policy</a>
-                <a href="terms.html">Terms of Service</a>
-            </div>
-            <div class="footer-social">
-                <a href="https://facebook.com" target="_blank">Facebook</a>
-                <a href="https://twitter.com" target="_blank">Twitter</a>
-                <a href="https://instagram.com" target="_blank">Instagram</a>
-                <a href="https://linkedin.com" target="_blank">LinkedIn</a>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2024 Stethology for NEET. All rights reserved.</p>
-        </div>
-    </footer>
 
     <script>
         function toggleSidebar() {
