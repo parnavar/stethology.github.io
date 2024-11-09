@@ -128,35 +128,40 @@
             left: 0;
         }
 
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            /* Adjust banner for mobile screens */
-            .banner-wrapper {
-                top: 10px;
-            }
+        /* Responsive adjustments for mobile screens */
+@media (max-width: 768px) {
+    /* Adjust banner for mobile screens */
+    .banner-wrapper {
+        top: 0; /* Set top to 0 for full usage of space */
+    }
 
-            .banner {
-                padding: 10px 20px;
-                width: 95%;
-                max-width: 100%;
-                box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
-            }
+    .banner {
+        padding: 10px 20px;
+        width: 100%; /* Ensure full width usage */
+        box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+    }
 
-            .banner-title {
-                font-size: 18px;
-                margin: 0;
-                text-align: center;
-                flex-grow: 1;
-            }
+    .banner img {
+        height: 30px; /* Reduce logo height */
+    }
 
-            .mobile-menu-toggle {
-                font-size: 26px;
-                margin-right: 0;
-            }
+    /* Adjust iframe container margin */
+    .iframe-container {
+        margin-top: 60px; /* Reduced gap below the header */
+        height: calc(100vh - 60px); /* Make iframe take up full height below header */
+    }
 
-            .banner img {
-                height: 35px;
-            }
+    /* Hide sidebar completely when closed */
+    .sidebar {
+        display: none;
+    }
+
+    .sidebar.show-sidebar {
+        display: block;
+        left: 0;
+    }
+}
+
 
             /* Adjust iframe container margin */
             .iframe-container {
