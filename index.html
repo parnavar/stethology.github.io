@@ -20,7 +20,7 @@
             justify-content: center;
             align-items: center;
             position: fixed;
-            top: 20px; /* Spacing from the top */
+            top: 20px;
             width: 100%;
             z-index: 1000;
         }
@@ -30,12 +30,12 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background-color: #ffffff; /* White background */
+            background-color: #ffffff;
             padding: 14px 30px;
             border-radius: 12px;
             width: 90%;
             max-width: 1200px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15); /* Light shadow */
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
             color: #333;
         }
 
@@ -51,18 +51,6 @@
             color: #333333;
             flex-grow: 1;
             text-align: center;
-        }
-
-        .mobile-menu-toggle {
-            font-size: 28px;
-            cursor: pointer;
-            color: #333333;
-            transition: color 0.3s;
-            margin-right: 15px;
-        }
-
-        .mobile-menu-toggle:hover {
-            color: #007bff;
         }
 
         /* Sidebar styles */
@@ -110,11 +98,12 @@
 
         /* Iframe container */
         .iframe-container {
-            margin-top: 130px; /* Space below the header */
             padding: 20px;
             height: calc(100vh - 150px);
             width: 100%;
             background-color: #ffffff;
+            margin-left: 0;
+            margin-top: 130px; /* Space below the header */
         }
 
         .iframe-container iframe {
@@ -129,46 +118,26 @@
         }
 
         /* Responsive adjustments for mobile screens */
-@media (max-width: 768px) {
-    /* Adjust banner for mobile screens */
-    .banner-wrapper {
-        top: 2; /* Set top to 0 for full usage of space */
-    }
-
-    .banner {
-        padding: 10px 20px;
-        width: 100%; /* Ensure full width usage */
-        box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
-    }
-
-    .banner img {
-        height: 30px; /* Reduce logo height */
-    }
-
-    /* Adjust iframe container margin */
-    .iframe-container {
-        margin-top: 60px; /* Reduced gap below the header */
-        height: calc(100vh - 60px); /* Make iframe take up full height below header */
-    }
-
-    /* Hide sidebar completely when closed */
-    .sidebar {
-        display: none;
-    }
-
-    .sidebar.show-sidebar {
-        display: block;
-        left: 0;
-    }
-}
-
-
-            /* Adjust iframe container margin */
-            .iframe-container {
-                margin-top: 70px; /* Reduced gap below the header */
+        @media (max-width: 768px) {
+            .banner-wrapper {
+                top: 2;
             }
 
-            /* Hide sidebar completely when closed */
+            .banner {
+                padding: 10px 20px;
+                width: 100%;
+                box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+            }
+
+            .banner img {
+                height: 30px;
+            }
+
+            .iframe-container {
+                margin-top: 60px;
+                height: calc(100vh - 60px);
+            }
+
             .sidebar {
                 display: none;
             }
@@ -178,6 +147,42 @@
                 left: 0;
             }
         }
+
+        /* Adjust layout for larger screens */
+        @media (min-width: 768px) {
+            .banner {
+                width: 100%; /* Make the banner occupy full width */
+                max-width: none;
+                padding: 14px 20px;
+            }
+
+            .banner-wrapper {
+                justify-content: space-between; /* Spread out the banner items */
+            }
+
+            .mobile-menu-toggle {
+                display: none; /* Hide the menu toggle on larger screens */
+            }
+
+            /* Position the select dropdown on the right */
+            #class-select {
+                position: absolute;
+                right: 20px;
+                top: 30px;
+            }
+
+            .sidebar {
+                left: 0;
+                width: 235px;
+                position: fixed;
+            }
+
+            .iframe-container {
+                margin-left: 250px; /* Space for the sidebar */
+                margin-top: 70px;
+                width: calc(100% - 250px); /* Adjust iframe to fit next to the sidebar */
+            }
+        }
     </style>
     <title>Stethology for NEET</title>
 </head>
@@ -185,13 +190,9 @@
 <body>
     <div class="banner-wrapper">
         <div class="banner" id="banner">
-            <div class="mobile-menu-toggle" onclick="toggleSidebar()">☰</div>
+            <!-- Remove the mobile-menu-toggle button on larger screens -->
             <img src="sfneetlogo.jpg" alt="Stethology for NEET Logo">
-        </div>
-    </div>
-
-    <div class="sidebar" id="sidebar">
-        <div class="dropdown">
+            <div class="mobile-menu-toggle" onclick="toggleSidebar()">☰</div>
             <select id="class-select" onchange="handleDropdownChange(event)">
                 <option value="Select class" disabled>Select class</option>
                 <option value="🧑‍🎓 XI - NEET">🧑‍🎓XI - NEET</option>
@@ -199,6 +200,9 @@
                 <option value="🧑‍🎓 Dropper - NEET">🧑‍🎓Dropper - NEET</option>
             </select>
         </div>
+    </div>
+
+    <div class="sidebar" id="sidebar">
         <a href="study.js" class="active" onclick="openPage(event, 'homepage.html')">📚 Study</a>
         <a href="batches.html" onclick="openPage(event, 'batches.html')">✍️ Batches</a>
         <a href="https://www.example.com/subject3" onclick="openPage(event, 'https://www.example.com/subject3')">📝 Test Series</a>
