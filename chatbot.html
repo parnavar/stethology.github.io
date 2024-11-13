@@ -1,0 +1,29 @@
+<div class="chatbot-container">
+    <script src="https://askelliebots.blob.core.windows.net/askelliefiles/widget-integration-249.js"></script>
+</div>
+
+<style>
+  .chatbot-container {
+    position: fixed; /* Fix the position */
+    right: 20px; /* Align to the right */
+    bottom: 20px; /* Align to the bottom */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh; /* Adjust height */
+    width: auto;  /* Full width on all devices */
+    z-index: 1000; /* Ensure it's on top */
+  }
+
+  /* Optional: Make the script responsive */
+  script {
+    height: 100%; /* Full height */
+    width: 100%;  /* Full width */
+  }
+
+  @media (max-width: 600px) {
+    .chatbot-container {
+      height: 60vh; /* Adjust height for smaller screens */
+    }
+  }
+</style>
