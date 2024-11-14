@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"> <!-- Prevent zoom -->
     <style>
         /* Reset and global styles */
         body {
@@ -120,7 +120,7 @@
         /* Responsive adjustments for mobile screens */
         @media (max-width: 768px) {
             .banner-wrapper {
-                top: 2;
+                top: 0; /* Adjusted */
             }
 
             .banner {
@@ -131,6 +131,15 @@
 
             .banner img {
                 height: 30px;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+                cursor: pointer;
+                font-size: 28px;
+                padding: 5px 15px;
+                position: absolute;
+                left: 10px; /* Positioned to the left */
             }
 
             .iframe-container {
@@ -190,9 +199,9 @@
 <body>
     <div class="banner-wrapper">
         <div class="banner" id="banner">
-            <!-- Remove the mobile-menu-toggle button on larger screens -->
+            <!-- Add mobile-menu-toggle button on the extreme left for mobile screens -->
+            <div class="mobile-menu-toggle" onclick="toggleSidebar()">|||</div>
             <img src="sfneetlogo.jpg" alt="Stethology for NEET Logo">
-            <div class="mobile-menu-toggle" onclick="toggleSidebar()">☰</div>
             <select id="class-select" onchange="handleDropdownChange(event)">
                 <option value="Select class" disabled>Select class</option>
                 <option value="🧑‍🎓 XI - NEET">🧑‍🎓XI - NEET</option>
