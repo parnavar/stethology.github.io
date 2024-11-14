@@ -160,57 +160,33 @@
         }
 
         /* Adjust layout for larger screens */
-        /* Responsive adjustments for mobile screens */
-@media (max-width: 768px) {
-    .banner-wrapper {
-        top: 0; /* Adjusted */
-    }
+        @media (min-width: 768px) {
+            .banner {
+                width: 100%; /* Make the banner occupy full width */
+                max-width: none;
+                padding: 14px 20px;
+            }
 
-    .banner {
-        padding: 10px 20px;
-        width: 100%;
-        box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
-    }
+            .banner-wrapper {
+                justify-content: space-between; /* Spread out the banner items */
+            }
 
-    .banner img {
-        height: 30px;
-        margin-left: 50px; /* Shift the logo to avoid mixing with the ||| button */
-    }
+            .mobile-menu-toggle {
+                display: none; /* Hide the menu toggle on larger screens */
+            }
 
-    .mobile-menu-toggle {
-        display: block;
-        cursor: pointer;
-        font-size: 28px;
-        padding: 5px 15px;
-        position: absolute;
-        left: 10px; /* Positioned to the left */
-        transform: rotate(90deg); /* Rotated ||| by 90 degrees */
-    }
+            /* Position the select dropdown on the right */
+            #class-select {
+                position: absolute;
+                right: 20px;
+                top: 30px;
+            }
 
-    .iframe-container {
-        margin-top: 60px;
-        height: calc(100vh - 60px);
-        width: 100%;
-        max-width: 100%; /* Ensure it doesn't exceed the screen width */
-        margin: 0 auto; /* Center the iframe on mobile */
-    }
-
-    .iframe-container iframe {
-        width: 100%;
-        max-width: 100%; /* Make the iframe fill the container */
-        height: 100%;
-        border: none;
-    }
-
-    .sidebar {
-        display: none;
-    }
-
-    .sidebar.show-sidebar {
-        display: block;
-        left: 0;
-    }
-}
+            .sidebar {
+                left: 0;
+                width: 235px;
+                position: fixed;
+            }
 
             .iframe-container {
                 margin-left: 250px; /* Space for the sidebar */
