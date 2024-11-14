@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"> <!-- Prevent zoom -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         /* Reset and global styles */
         body {
@@ -103,9 +103,7 @@
             width: 100%;
             background-color: #ffffff;
             margin-left: 0;
-            margin-top: 130px;/* Space below the header */
-            justify-content: center; /* Center horizontally */
-            align-items: center;/* Center vertically */
+            margin-top: 130px; /* Space below the header */
         }
 
         .iframe-container iframe {
@@ -122,7 +120,7 @@
         /* Responsive adjustments for mobile screens */
         @media (max-width: 768px) {
             .banner-wrapper {
-                top: 0; /* Adjusted */
+                top: 2;
             }
 
             .banner {
@@ -133,24 +131,11 @@
 
             .banner img {
                 height: 30px;
-                margin-left: 50px; /* Shift the logo to avoid mixing with the ||| button */
-            }
-
-            .mobile-menu-toggle {
-                display: block;
-                cursor: pointer;
-                font-size: 28px;
-                padding: 5px 15px;
-                position: absolute;
-                left: 10px; /* Positioned to the left */
-                transform: rotate(90deg); /* Rotated ||| by 90 degrees */
             }
 
             .iframe-container {
                 margin-top: 60px;
                 height: calc(100vh - 60px);
-                justify-content: left; /* Center horizontally */
-                align-items: center;/* Center vertically */
             }
 
             .sidebar {
@@ -193,7 +178,7 @@
             }
 
             .iframe-container {
-                margin-left: 200px; /* Space for the sidebar */
+                margin-left: 250px; /* Space for the sidebar */
                 margin-top: 70px;
                 width: calc(100% - 250px); /* Adjust iframe to fit next to the sidebar */
             }
@@ -205,9 +190,9 @@
 <body>
     <div class="banner-wrapper">
         <div class="banner" id="banner">
-            <!-- Add mobile-menu-toggle button on the extreme left for mobile screens -->
-            <div class="mobile-menu-toggle" onclick="toggleSidebar()">|||</div>
+            <!-- Remove the mobile-menu-toggle button on larger screens -->
             <img src="sfneetlogo.jpg" alt="Stethology for NEET Logo">
+            <div class="mobile-menu-toggle" onclick="toggleSidebar()">☰</div>
             <select id="class-select" onchange="handleDropdownChange(event)">
                 <option value="Select class" disabled>Select class</option>
                 <option value="🧑‍🎓 XI - NEET">🧑‍🎓XI - NEET</option>
