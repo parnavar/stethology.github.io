@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <style>
         /* Reset and global styles */
         body {
@@ -133,6 +133,15 @@
                 height: 30px;
             }
 
+            /* Position mobile menu button to the left extreme */
+            .mobile-menu-toggle {
+                display: block;
+                font-size: 24px;
+                margin-right: auto;
+                cursor: pointer;
+                padding: 0 10px;
+            }
+
             .iframe-container {
                 margin-top: 60px;
                 height: calc(100vh - 60px);
@@ -190,9 +199,9 @@
 <body>
     <div class="banner-wrapper">
         <div class="banner" id="banner">
-            <!-- Remove the mobile-menu-toggle button on larger screens -->
-            <img src="sfneetlogo.jpg" alt="Stethology for NEET Logo">
+            <!-- Mobile menu toggle button moved to the left extreme -->
             <div class="mobile-menu-toggle" onclick="toggleSidebar()">☰</div>
+            <img src="sfneetlogo.jpg" alt="Stethology for NEET Logo">
             <select id="class-select" onchange="handleDropdownChange(event)">
                 <option value="Select class" disabled>Select class</option>
                 <option value="🧑‍🎓 XI - NEET">🧑‍🎓XI - NEET</option>
