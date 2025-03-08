@@ -4,6 +4,8 @@
     <title>NEET Exam Portal</title>
     <style>
 /* Ensure the container takes full width */
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
 .summary-container {
     display: flex;
     flex-wrap: wrap;
@@ -17,7 +19,7 @@
 
 @media (max-width: 768px) { 
  .result-summary {
-        width: 100%;
+        width: auto;
         text-align: left;
         padding: 10px;
     }
@@ -28,7 +30,7 @@
 
     .summary-container > div {
         width: 100% !important; /* Ensure full width */
-        min-width: unset; /* Remove any minimum width restrictions */
+        min-width: 100%; /* Remove any minimum width restrictions */
         max-width: 100%; /* Keep it within the viewport */
     }
 
@@ -38,13 +40,6 @@
         height: auto !important;
     }
 }
-
-
-    /* Ensure no unwanted horizontal scrolling */
-    html, body {
-        width: 100%;
-        overflow-x: hidden;
-    }
 }
 
 
@@ -326,7 +321,7 @@
         document.getElementById('result-summary').innerHTML = `
 <div class="summary-container" style="display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 20px;">
     <!-- Score Card with Pie Chart -->
-    <div style="flex: 1; min-width: 300px; background: #f8f9fa; padding: 20px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); display: flex; align-items: center;">
+    <div style="flex: 1; min-width: 200px; background: #f8f9fa; padding: 20px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); display: flex; align-items: left;">
         <div style="flex: 1;">
             <h3 style="margin: 0; color: #2c3e50;">Score</h3>
             <p style="font-size: 24px; font-weight: bold; margin: 5px 0;">${marksObtained} / ${totalQuestions * 4}</p>
