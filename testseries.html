@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>NEET Exam Portal</title>
+    <style>
+/* Ensure the container takes full width */
+.summary-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 200vw; /* Full viewport width */
+    max-width: 100%; /* Ensure it doesn't exceed the screen */
+    overflow: hidden; /* Prevent horizontal scrolling */
+    padding: 0 10px; /* Optional: Add some space on the sides */
+    box-sizing: border-box; /* Include padding in width calculation */
+}
+
+@media (max-width: 768px) { 
+    .summary-container {
+        display: flex; /* Hide container on mobile */
+        width: 200vw;
+    }
+    
+    .result-card {
+        width: auto; /* Make cards full width */
+        margin: 1px 0; /* Add some spacing */
+    }
+}
+
+    /* Fix bar chart width */
+    #questionBarChart {
+        width: 100% !important;
+        max-width: 100%;
+    }
+}
+
+    /* Ensure no unwanted horizontal scrolling */
+    html, body {
+        width: 100%;
+        overflow-x: hidden;
+    }
+}
+
+
+
+    #result-summary {
+        overflow-x: hidden;
+    }
+    canvas {
+        max-width: 100%;
+        height: auto !important;
+    }
+    .palette-toggle-btn, #timer {
+        font-size: 14px;
+        padding: 5px 10px;
+    }
+}
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0px auto;
+            padding: 70px;
+            background: white;
+            border-radius: 12px;
+            border: 1px solid #ddd;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            margin-top: 5px;
+        }
+        .test-title {
+            font-size: 14px;
+            font-weight: bold;
+            color: #555;
+            margin-bottom: 5px;
+        }
+        button {
+            padding: 12px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            background-color: #6c5ce7;
+            color: white;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        button:hover {
+            background-color: #4834d4;
+            transform: translateY(-2px);
+        }
+        .start-button {
+            background-color: white;
+            color: #6c5ce7;
+            border: 2px solid #6c5ce7;
+            font-weight: bold;
+        }
+        .start-button:hover {
+            background-color: #6c5ce7;
+            color: white;
+        }
+        .options-container label {
+            display: block;
+            padding: 10px;
+            background: #f0f0f0;
+            margin: 5px 0;
+            cursor: pointer;
+            border-radius: 6px;
+        }
+        input[type="radio"] { display: none; }
+        input[type="radio"]:checked + label {
+            background: #6c5ce7;
+            color: white;
+        }
+        .palette-toggle-btn {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            padding: 8px 12px;
+            border: 2px solid #341539;
+            background: white;
+            cursor: pointer;
+            z-index: 1100;
+            font-weight: bold;
+        }
+        .pulsing {
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        #question-palette {
+            position: fixed;
+            top: 0;
+            right: -250px;
+            width: 200px;
+            height: 100%;
+            background: white;
+            box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+            padding: 10px;
+            overflow-y: auto;
+            transition: right 0.3s;
+        }
+        .question-palette button {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        #timer {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            background: white;
+            padding: 6px 12px;
+            border: 2px solid #6c5ce7;
+            font-weight: bold;
+        }
+.palette-toggle-btn {
+        background: white;
+        color: #6c5ce7;
+        border: 2px solid #6c5ce7;
+    }
+
+    .palette-toggle-btn:hover {
+        background: #6c5ce7;
+        color: white;
+    }
+    </style>
+</head>
+<body>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<div id="instructions-container" class="container">
+    <div class="test-title">NEET FULL TEST - 1</div>
+    <h2>GENERAL INSTRUCTIONS</h2>
+    <ol>
+        <li>There will be <b>5 compulsory questions.</b></li>
+        <li>Duration: 180 minutes (3 hours)</li>
+        <li>+4 marks for correct, -1 mark for wrong answer.</li>
+    </ol>
+    <button class="start-button" onclick="startTest()">Start Test</button>
+</div>
+
+<div id="question-container" class="container" style="display:none">
+    <h2 id="question-title">Question 1</h2>
+    <img id="question-image" src="" alt="Question Image" style="width:100%; max-height:300px; object-fit:contain; border:1px solid #ddd; margin:15px 0;">
+    <div class="options-container">
+        <input type="radio" id="optionA" name="answer" value="A"><label for="optionA">Option A</label>
+        <input type="radio" id="optionB" name="answer" value="B"><label for="optionB">Option B</label>
+        <input type="radio" id="optionC" name="answer" value="C"><label for="optionC">Option C</label>
+        <input type="radio" id="optionD" name="answer" value="D"><label for="optionD">Option D</label>
+    </div>
+    <button onclick="markForReview()">Mark for Review</button>
+    <button onclick="nextQuestion()">Next (Skip if Unanswered)</button>
+</div>
+
+<div id="result-container" class="container" style="display:none">
+    <h2>Result Summary</h2>
+    <div id="result-summary"></div>
+</div>
+
+<button class="palette-toggle-btn pulsing" onclick="togglePalette()">☰ Questions</button>
+<div id="question-palette" class="question-palette"></div>
+<div id="timer">Time Left: 03:00:00</div>
+
+<script>
+    const totalQuestions = 5;
+    const answers = ["A", "B", "C", "A", "D"];
+    const githubBaseURL = "https://raw.githubusercontent.com/parnavar/testportal/main/";
+    let currentQuestion = 0, timeLeft = 3 * 60 * 60, timer;
+    let userAnswers = Array(totalQuestions).fill(null);
+    let reviewFlags = Array(totalQuestions).fill(false);
+
+    document.addEventListener("DOMContentLoaded", () => {
+        if (localStorage.getItem("attempted")) {
+            document.querySelector(".start-button").innerText = "Re-attempt Test";
+            document.querySelector(".start-button").onclick = restartTest;
+            const viewResultsBtn = document.createElement("button");
+            viewResultsBtn.innerText = "View Results";
+            viewResultsBtn.className = "start-button";
+            viewResultsBtn.onclick = () => showResult();
+            document.getElementById("instructions-container").appendChild(viewResultsBtn);
+        }
+    });
+
+    function startTest() {
+        localStorage.setItem("attempted", "true");
+        document.getElementById('instructions-container').style.display = 'none';
+        document.getElementById('question-container').style.display = 'block';
+        document.querySelector('.palette-toggle-btn').classList.remove('pulsing');
+        buildPalette();
+        loadQuestion();
+        startTimer();
+    }
+
+    function restartTest() {
+        localStorage.removeItem("attempted");
+        userAnswers.fill(null);
+        reviewFlags.fill(false);
+        timeLeft = 3 * 60 * 60;
+        startTest();
+    }
+
+    function loadQuestion() {
+        document.getElementById('question-title').innerText = `Question ${currentQuestion+1}`;
+        document.getElementById('question-image').src = `${githubBaseURL}q${currentQuestion+1}.jpg`;
+        document.querySelectorAll('input[name="answer"]').forEach(input => input.checked = input.value === userAnswers[currentQuestion]);
+        updatePalette();
+    }
+
+    function nextQuestion() {
+        saveAnswer();
+        if (++currentQuestion < totalQuestions) loadQuestion(); else showResult();
+    }
+
+    function saveAnswer() {
+        const selected = document.querySelector('input[name="answer"]:checked');
+        userAnswers[currentQuestion] = selected ? selected.value : null;
+    }
+
+    function markForReview() {
+        reviewFlags[currentQuestion] = !reviewFlags[currentQuestion];
+        updatePalette();
+    }
+
+    function updatePalette() {
+        document.querySelectorAll('.question-palette button').forEach((btn, i) => {
+            btn.style.background = reviewFlags[i] ? 'purple' : (userAnswers[i] ? 'green' : 'red');
+            btn.style.color = 'white';
+        });
+    }
+
+    function buildPalette() {
+        document.getElementById('question-palette').innerHTML = Array.from({length: totalQuestions}, (_, i) =>
+            `<button onclick="currentQuestion=${i};loadQuestion();">${i+1}</button>`
+        ).join('');
+        updatePalette();
+    }
+
+    function startTimer() {
+        timer = setInterval(() => {
+            if (--timeLeft <= 0) {
+                clearInterval(timer);
+                showResult();
+            }
+            const hrs = Math.floor(timeLeft / 3600);
+            const mins = Math.floor((timeLeft % 3600) / 60);
+            const secs = timeLeft % 60;
+            document.getElementById('timer').innerText = `Time Left: ${String(hrs).padStart(2,'0')}:${String(mins).padStart(2,'0')}:${String(secs).padStart(2,'0')}`;
+        }, 1000);
+    }
+    function showResult() {
+        clearInterval(timer);
+        document.getElementById('question-container').style.display = 'none';
+        document.getElementById('result-container').style.display = 'block';
+
+        const totalQuestions = 5;
+        const correct = userAnswers.filter((ans, index) => ans === answers[index]).length;
+        const incorrect = userAnswers.filter((ans, index) => ans && ans !== answers[index]).length;
+        const skipped = userAnswers.filter(ans => !ans).length;
+        const marksObtained = (correct * 4) - (incorrect * 1);
+        const accuracy = ((correct / (correct + incorrect)) * 100 || 0).toFixed(2);
+        const completionRate = ((correct + incorrect) / totalQuestions * 100).toFixed(2);
+        const timeTaken = 3 * 60 * 60 - timeLeft;
+        const hours = Math.floor(timeTaken / 3600);
+        const minutes = Math.floor((timeTaken % 3600) / 60);
+        const seconds = timeTaken % 60;
+
+        document.getElementById('result-summary').innerHTML = `
+<div class="summary-container" style="display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 20px;">
+    <!-- Score Card with Pie Chart -->
+    <div style="flex: 1; min-width: 300px; background: #f8f9fa; padding: 20px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); display: flex; align-items: center;">
+        <div style="flex: 1;">
+            <h3 style="margin: 0; color: #2c3e50;">Score</h3>
+            <p style="font-size: 24px; font-weight: bold; margin: 5px 0;">${marksObtained} / ${totalQuestions * 4}</p>
+        </div>
+        <div style="flex: 0 0 120px; height: 120px;">
+            <canvas id="marksPieChart"></canvas>
+        </div>
+    </div>
+
+    <!-- Combined Stats Card -->
+    <div style="flex: 1; min-width: 250px; background: #f8f9fa; padding: 20px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+        <h3 style="margin-top: 0; color: #2c3e50;">Question Analysis</h3>
+        <div style="display: grid; gap: 12px;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span>Correct Answers:</span>
+                <span style="font-weight: bold; color: #27ae60;">${correct}</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span>Incorrect Answers:</span>
+                <span style="font-weight: bold; color: #e74c3c;">${incorrect}</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span>Skipped Questions:</span>
+                <span style="font-weight: bold; color: #95a5a6;">${skipped}</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bar Chart Container -->
+    <div style="flex: 2; min-width: 300px; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+        <canvas id="questionBarChart" style="height: 200px;"></canvas>
+    </div>
+</div>
+
+<!-- Additional Metrics -->
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 20px;">
+    <div style="background: #e8f4fc; padding: 20px; border-radius: 10px; text-align: center;">
+        <h3 style="margin: 0 0 10px 0; color: #2980b9;">Accuracy</h3>
+        <div style="font-size: 24px; font-weight: bold; color: #2980b9;">
+            ${accuracy}%
+        </div>
+    </div>
+    
+    <div style="background: #f0f0f0; padding: 20px; border-radius: 10px; text-align: center;">
+        <h3 style="margin: 0 0 10px 0; color: #2c3e50;">Completion</h3>
+        <div style="font-size: 24px; font-weight: bold; color: #2c3e50;">
+            ${completionRate}%
+        </div>
+    </div>
+    
+    <div style="background: #f0f0f0; padding: 20px; border-radius: 10px; text-align: center;">
+        <h3 style="margin: 0 0 10px 0; color: #2c3e50;">Time Taken</h3>
+        <div style="font-size: 24px; font-weight: bold; color: #2c3e50;">
+            ${hours.toString().padStart(2,'0')}:${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')}
+        </div>
+    </div>
+</div>`;
+
+        // Create pie chart
+        setTimeout(() => {
+            const pieCtx = document.getElementById('marksPieChart').getContext('2d');
+            new Chart(pieCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Marks Obtained', 'Marks Left'],
+                    datasets: [{
+                        data: [marksObtained, (totalQuestions * 4) - marksObtained],
+                        backgroundColor: ['#4CAF50', '#ddd']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom' },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.label + ': ' + Math.round(context.raw);
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }, 100);
+
+        // Create bar chart
+        setTimeout(() => {
+            const barCtx = document.getElementById('questionBarChart').getContext('2d');
+            new Chart(barCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Correct', 'Incorrect', 'Skipped'],
+                    datasets: [{
+                        label: 'Question Count',
+                        data: [correct, incorrect, skipped],
+                        backgroundColor: [
+                            'rgba(46, 204, 113, 0.7)',
+                            'rgba(231, 76, 60, 0.7)',
+                            'rgba(149, 165, 166, 0.7)'
+                        ],
+                        borderColor: [
+                            '#2ecc71',
+                            '#e74c3c',
+                            '#95a5a6'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                precision: 0
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+        }, 100);
+    }
+</script>
+</body>
+</html>
