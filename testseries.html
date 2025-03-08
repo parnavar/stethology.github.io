@@ -17,22 +17,23 @@
 
 @media (max-width: 768px) { 
     .summary-container {
-        display: flex; /* Hide container on mobile */
-        width: 200vw;
+        flex-direction: column; /* Stack elements vertically */
+        align-items: center; /* Center align for better appearance */
     }
-    
-    .result-card {
-        width: auto; /* Make cards full width */
-        margin: 1px 0; /* Add some spacing */
-    }
-}
 
-    /* Fix bar chart width */
+    .summary-container > div {
+        width: 100% !important; /* Ensure full width */
+        min-width: unset; /* Remove any minimum width restrictions */
+        max-width: 100%; /* Keep it within the viewport */
+    }
+
     #questionBarChart {
         width: 100% !important;
         max-width: 100%;
+        height: auto !important;
     }
 }
+
 
     /* Ensure no unwanted horizontal scrolling */
     html, body {
